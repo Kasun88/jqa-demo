@@ -1,0 +1,111 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 2.0</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!--<button (click)="addWidget()">Add widget</button>-->
+    <button (click)="myModal.open()">Add widget</button>
+    <button (click)="saveDashboard()">Save Dashboard</button>
+    <br><br>
+
+    <dashboard (onOrderChange)="logOrder($event)" class="dashboard" [widgetsSize]="widgetsSize"
+               [margin]="dashboardMargin">
+
+<!--
+      <widget [size]="[2, 2]" widgetId="big" class="handle">
+        <div class="head">Big widget [2, 2]</div>
+      </widget>
+
+      <widget [size]="[2, 3]" widgetId="large">
+        <div widgetHandle class="head handle">Large widget [2, 1] handle only on text</div>
+      </widget>
+      <widget [size]="[1, 2]" widgetId="tall">
+        <div widgetHandle class="head handle">Tall widget [1, 2] handle only on text</div>
+      </widget>
+      <widget widgetId="small" class="handle">
+        <div class="head">Small widget [1, 1]</div>
+      </widget>
+      <widget [size]="[2, 2]" widgetId="big" class="handle">
+        <div class="head">Big widget [2, 2]</div>
+      </widget>
+      <widget *ngFor="let item of [1, 2, 3, 4, 5, 6]; let i = index;" [widgetId]="i" class="handle">
+        <div class="head">Widget {{i}} [1, 1]</div>
+        <div class="close" (click)="close($event, i)">X</div>
+      </widget>
+-->
+
+    </dashboard>
+
+
+    <modal #myModal (onClose)="addWidget()">
+      <modal-header>
+        <h1>Add New Widget</h1>
+      </modal-header>
+      <modal-content>
+        <div >
+          <form>
+            <div class="form-group">
+              <label for="name">Widget Name</label>
+              <input type="text" class="form-control" id="name" name="name"
+                      [(ngModel)]="widget.name" required/>
+            </div>
+            <div class="form-group">
+              <label for="query">Query</label>
+              <textarea type="text" class="form-control" id="query" name="query"
+                        [(ngModel)]="widget.query" required> </textarea>
+            </div>
+            <div class="form-group">
+              <label for="endPointUrl">Datasource URL</label>
+              <input type="text" class="form-control" id="endPointUrl" name="endPointUrl"
+                     [(ngModel)]="widget.endPointUrl" required/>
+            </div>
+            <div class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="chartType" id="barChart" value="barChart"
+                         [(ngModel)]="widget.chartType">
+                    Bar Chart
+                </label>
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="chartType" id="lineChart" value="lineChart"
+                         [(ngModel)]="widget.chartType">
+                  Line Chart
+                </label>
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="chartType" id="simpleTile" value="simpleTile"
+                         [(ngModel)]="widget.chartType">
+                  Tile
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="xAxisLabel">X Axis Label</label>
+              <input type="text" class="form-control" id="xAxisLabel" name="xAxisLabel"
+                     [(ngModel)]="widget.xAxisLabel" required/>
+            </div>
+            <div class="form-group">
+              <label for="yAxisLabel">Y Axis Label</label>
+              <input type="text" class="form-control" id="yAxisLabel" name="yAxisLabel"
+                     [(ngModel)]="widget.yAxisLabel" required/>
+            </div>
+          </form>
+        </div>
+      </modal-content>
+      <modal-footer>
+        <button class="btn btn-primary" (click)="myModal.close()">Add</button>
+        <button class="btn btn-danger" (click)="myModal.dismiss()">Cancel</button>
+      </modal-footer>
+    </modal>
+  </section>
+  <!-- /.content -->
+</div>

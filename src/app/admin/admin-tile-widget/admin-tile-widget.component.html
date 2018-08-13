@@ -1,0 +1,53 @@
+
+<div style="width: inherit; padding: 20px;">
+  <div ><button (click)="myModal.open()">Edit Widget</button></div>
+  <div class="row">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>{{chart.value}}</h3>
+
+        <p>{{widgetConfig.name}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<modal #myModal (onClose)="editWidget()">
+  <modal-header>
+    <h1>Edit Widget</h1>
+  </modal-header>
+  <modal-content>
+    <div >
+      <form>
+        <div class="form-group">
+          <label for="name">Widget Name</label>
+          <input type="text" class="form-control" id="name" name="name"
+                 [(ngModel)]="widgetConfig.name" required/>
+        </div>
+        <div class="form-group">
+          <label for="query">Query</label>
+          <textarea type="text" class="form-control" id="query" name="query"
+                    [(ngModel)]="widgetConfig.query" required> </textarea>
+        </div>
+        <div class="form-group">
+          <label for="endPointUrl">Datasource URL</label>
+          <input type="text" class="form-control" id="endPointUrl" name="endPointUrl"
+                 [(ngModel)]="widgetConfig.endPointUrl" required/>
+        </div>
+        <div class="form-group">
+          <label for="xAxisLabel">X Axis Label</label>
+          <input type="text" class="form-control" id="xAxisLabel" name="xAxisLabel"
+                 [(ngModel)]="widgetConfig.xAxisLabel" required/>
+        </div>
+        <div class="form-group">
+          <label for="yAxisLabel">Y Axis Label</label>
+          <input type="text" class="form-control" id="yAxisLabel" name="yAxisLabel"
+                 [(ngModel)]="widgetConfig.yAxisLabel" required/>
+        </div>
+      </form>
+    </div>
+  </modal-content>
+  <modal-footer>
+    <button class="btn btn-primary" (click)="myModal.close()">Update</button>
+    <button class="btn btn-danger" (click)="myModal.dismiss()">Cancel</button>
+  </modal-footer>
+</modal>
