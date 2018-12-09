@@ -22,11 +22,9 @@ import { AdminTileWidgetComponent } from './admin-tile-widget/admin-tile-widget.
 import { AdminWidgetDataServiceService } from './service/admin-widget-data-service.service';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-export declare var require: any;
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+import * as highcharts from 'highcharts/highcharts';
 
-export function highchartsFactory() {
-  return require('highcharts');
-}
 
 
 
@@ -35,7 +33,7 @@ export function highchartsFactory() {
     CommonModule,
     AdminRoutingModule,
     NgDashboardModule,
-    ChartModule.forRoot(require('highcharts')),
+    ChartModule,
     LocalStorageModule.withConfig({
       prefix: 'big-data-dashboard',
       storageType: 'localStorage'
@@ -67,6 +65,25 @@ export function highchartsFactory() {
     AdminLineChartWidgetComponent,
     AdminTileWidgetComponent
   ],
-  providers: [AdminWidgetDataServiceService]
+  providers: [
+    AdminWidgetDataServiceService,
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
+  ]
 })
 export class AdminModule { }
+
+export function highchartsFactory() {
+  // Default options.
+  highcharts.setOptions({
+    global: {
+      useUTC: false
+    }
+  });
+
+  // Initialize addons.
+
+  return highcharts;
+}
