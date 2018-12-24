@@ -20,3 +20,6 @@
   cursor: move;
 }
 */
+.content_overflow{
+  overflow:auto
+}
