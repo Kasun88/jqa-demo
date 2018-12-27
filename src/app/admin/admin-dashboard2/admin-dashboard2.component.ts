@@ -1,14 +1,11 @@
 import {Component, OnInit, ViewChild, EventEmitter} from '@angular/core';
-import {DashboardComponent, WidgetComponent} from "ngx-dashboard";
-import {AdminSampleWidgetComponent} from "../admin-sample-widget/admin-sample-widget.component";
+import {DashboardComponent, WidgetComponent} from 'ngx-dashboard';
 import { LocalStorageService } from 'angular-2-local-storage';
-import {ModalModule} from "ng2-modal";
-import {AdminWidget} from "../modal/admin-widget";
-import {AdminBarChartWidgetComponent} from "../admin-bar-chart-widget/admin-bar-chart-widget.component";
-import {AdminLineChartWidgetComponent} from "../admin-line-chart-widget/admin-line-chart-widget.component";
-import {AdminWidgetDataServiceService} from "../service/admin-widget-data-service.service";
-import {log} from "util";
-import {AdminTileWidgetComponent} from "../admin-tile-widget/admin-tile-widget.component";
+import {AdminWidget} from '../modal/admin-widget';
+import {AdminBarChartWidgetComponent} from '../admin-bar-chart-widget/admin-bar-chart-widget.component';
+import {AdminLineChartWidgetComponent} from '../admin-line-chart-widget/admin-line-chart-widget.component';
+import {AdminWidgetDataServiceService} from '../service/admin-widget-data-service.service';
+import {AdminTileWidgetComponent} from '../admin-tile-widget/admin-tile-widget.component';
 // Variable in assets/js/scripts.js file
 
 declare var AdminLTE: any;
@@ -23,15 +20,14 @@ declare var AdminLTE: any;
 })
 export class AdminDashboard2Component implements OnInit {
   @ViewChild(DashboardComponent) dashboard: DashboardComponent;
-  widgetsSize: number[] = [300, 150];
-  dashboardMargin: number = 20;
+  widgetsSize: number[] = [50, 50];
+  dashboardMargin = 20;
   public widget: AdminWidget;
-  public widgets: AdminWidget[] =[];
-  errorMessage: string = "";
+  public widgets: AdminWidget[] = [];
+  errorMessage = '';
   constructor(private localStorageService: LocalStorageService,
-  private adminWidgetDataServiceService : AdminWidgetDataServiceService) {
+  private adminWidgetDataServiceService: AdminWidgetDataServiceService) {
     this.widget = new AdminWidget();
-    let int = 1;
   }
 
   ngOnInit() {
@@ -58,11 +54,12 @@ export class AdminDashboard2Component implements OnInit {
     if (window.innerWidth < 750) {
       this.dashboardMargin = 10;
       this.widgetsSize = [this.dashboard.width / 2 - this.dashboardMargin, this.widgetsSize[1]];
-    }
-    else {
-      this.dashboardMargin = 20;
+    }else {
+      this.dashboardMargin = 10;
       const nbColumn = Math.floor(this.dashboard.width / (300 + this.dashboardMargin));
+     // const nbColumn = 4;
       this.widgetsSize = [this.dashboard.width / nbColumn - this.dashboardMargin, this.widgetsSize[1]];
+      console.log(this.widgetsSize);
     }
   }
 
